@@ -7,20 +7,18 @@ var port = config.port;
 console.log("Starting");
 var server = http.createServer(function(request, response) {
 	console.log("Received request : " + request.url);
-	fs.readFile("./public" + request.url, function(error, data) {
-		if (error) {
-			response.writeHead(404, {
-				"Content-Type": "text/plain"
-			});
-			response.end("Sorry the page was not found.");
-		} else {
-			response.writeHead(200, {
-				"Content-Type": "text/html"
-			});
-			response.end(data);
-		}
 
+	response.writeHead(200, {
+		"Content-Type": "application/json"
 	});
+
+	var obj = {
+		error: 0,
+		message: "sussces"
+	};
+
+	var data = JSON.stringify(obj);
+	response.end(data);
 });
 
 //	listening in host and in port 
